@@ -15,68 +15,69 @@ botoes[1].onclick = aumentaTamanho;
 
 
 function diminuiTamanho() {
-if (tamanhoSenha > 1) {
-// tamanhoSenha tamanhoSenha-1;
-tamanhoSenha--;
-}
+  if (tamanhoSenha > 1) {
+    // tamanhoSenha tamanhoSenha-1;
+    tamanhoSenha--;
+  }
 
-numeroSenha.textContent = tamanhoSenha;
-geraSenha();
+  numeroSenha.textContent = tamanhoSenha;
+  geraSenha();
 }
- 
 function aumentaTamanho() {
-if (tamanhoSenha < 20) {
-
-// tamanhoSenha tamanho Senha+1;
-
-tamanho Senha++;
-
-}
-
-numeroSenha.textContent = tamanhoSenha;
-geraSenha();
+  if (tamanhoSenha < 20) {
+    // tamanhoSenha tamanho Senha+1;
+    tamanhoSenha
+  }
+  numeroSenha.textContent = tamanhoSenha;
+  geraSenha();
 }
 
 for (i=0; i < checkbox.length; i++) {
-checkbox[i].onclick = geraSenha;
+  checkbox[i].onclick = geraSenha;
 }
+
 geraSenha();
 
 function geraSenha() {
   let alfabeto = '';
   if (checkbox[0].checked) {
-  alfabeto = alfabeto + letrasMaiusculas;
+    alfabeto = alfabeto + letrasMaiusculas;
 }
-
 if (checkbox [1].checked) {
- alfabeto = alfabeto + letrasMinusculas;
+   alfabeto = alfabeto + letrasMinusculas;
 }
 
 if (checkbox[2].checked) {
-alfabeto = alfabeto + numeros;
+  alfabeto = alfabeto + numeros;
 }
 
 if (checkbox [3].checked) {
- alfabeto = alfabeto + simbolos;
+  alfabeto = alfabeto + simbolos;
 }
 
 let senha = '';
-
 for (let i=0; i < tamanhoSenha; i++) {
-let numeroAleatorio = Math.random() * alfabeto.length;
-numeroAleatorio = Math.floor(numeroAleatorio);
-senha = senha + alfabeto [numeroAleatorio];
+  let numeroAleatorio = Math.random() * alfabeto.length;
+  numeroAleatorio = Math.floor(numeroAleatorio);
+  senha = senha + alfabeto [numeroAleatorio];
 }
 
 campoSenha.value = senha;
-classificaSenha();
+classificaSenha(alfabeto.length);
+
 }
 
-function classificaSenha() {
- forcaSenha.classList.remove('fraca', 'media', 'forte');
- if (tamanhoSenha > 11){
+function classificaSenha(tamanhAlfabeto){
+  let entropia = tamanhoSenha * Math.log2 (tamanhoAlfabeto);
+  console.log(entropia);
+  forcaSenha.classList.remove('fraca', 'media', 'forte');
+  if (tamanhoSenha > 57){
     forcaSenha.classList.add('forte');
 } else if (tamanhoSenha > 5 && tamanhoSenha < 12 ) {
     forcaSenha.classList.add('media');
 } else if (tamanhoSenha <= 5){
     forcaSenha.classList.add('fraca');
+}
+const valorEntropia = document.querySelector('.entropia');
+valorEntropia.textContent = "Um computador pode levar ate " + Math.floor(2**entropia/(100e6*60*60*24)) + " dias para descobrir essa senha." 
+}
